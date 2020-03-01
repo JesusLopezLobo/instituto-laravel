@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -50,11 +52,14 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Incidencias</a>
+                            <a href="{{ route('incidencias.create') }}" class="nav-link">Incidencias</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Logs</a>
                             </li>
+
+                        @include('includes.avatar') <!-- Imagen -->
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
