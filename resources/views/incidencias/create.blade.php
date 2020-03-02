@@ -55,9 +55,9 @@
 
                             <div class="col-md-7">
                             <select class="browser-default custom-select" name="importancia">
-                                <option value="1">Leve</option>
-                                <option value="2">Grave</option>
-                                <option value="3">Muy grave</option>
+                                <option value="Leve">Leve</option>
+                                <option value="Grave">Grave</option>
+                                <option value="Muy grave">Muy grave</option>
                             </select>
 
                                 @if ($errors->has('importancia'))
@@ -76,8 +76,45 @@
 
                     </form>
                 </div>
-            </div>
+            </div><br><br>
+{{--             <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header"> --}}
+                                    <table class="table table-hover">
+                                            <tr class="bg-dark">   
+                                                <th class="text-white">Aula</th> 
+                                                <th class="text-white">Descripción</th>
+                                                <th class="text-white">Importancia</th>
+                                                <th class="text-white">Profesor</th>
+                                                <th></th>
+                                            </tr>
+                                    {{-- Listado de incidencias. --}}
+                                        @foreach ($incidencias as $value)
+                                            {{-- @if(Auth::user()->id == $value->user->id) --}}
+                                                <tr class="table-light">
 
+                                                    <td scope="col">{{ $value->aula }}</td>
+                                                    <td scope="col">{{ $value->descripcion }}</td>
+                                                    <td scope="col">{{ $value->importancia }}</td>
+                                                    <td scope="col">{{ $value->user->name }}</td>
+                                                <td><a href="{{ route('incidencias.delete', ['id' => $value->id]) }}" class="btn btn-danger">ELIMINAR</a>  <a href="{{ route('incidencias.edit', ['id' => $value->id]) }}" class="btn btn-success">EDITAR</a>  <a href="#" class="btn btn-primary">DETALLES</a></td>
+
+                                                </tr>
+                                            {{-- @endif --}}
+            
+                                            {{-- <p>{{$value->descripcion}}</p>
+                                            <p>{{$value->user->name}}</p> --}}
+                                            
+                                        @endforeach
+                                    </table>
+                                    {{ $incidencias->links() }}
+{{--                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
 
         </div>
     </div>

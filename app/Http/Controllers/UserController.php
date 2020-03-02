@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\User; // Modelo Usuario.
 
 class UserController extends Controller
 {
@@ -15,6 +16,29 @@ class UserController extends Controller
 
     public function config(){
         return view('user.config');
+    }
+
+    public function list(){
+        
+        $user=User::paginate(2);
+
+        return view("user.list", ['user'=>$user]);
+    }
+
+    public function delete($id){
+
+        // Objeto Incidencia.
+        $user = User::find($id);
+
+        //Comprobar si soy el dueño del comentario de la ap
+        //if($user->rol == "admin"){
+            $user->delete();
+            return redirect()->route('user.list')
+                            ->with(['message'=>'Has borrado el usuario correctamente.']); 
+/*         }else {
+            return redirect()->route('user.list')
+                            ->with(['message'=>'No se ha borrado.']); 
+        } */
     }
 
     public function update(Request $request){ 
@@ -56,6 +80,11 @@ class UserController extends Controller
         return redirect()-> route('config')
                                 ->with(['message'=>'El usuario actualizado correctamente']);
 
+    }
+
+    public function detalles($id){
+        $user = User::find($id);
+        return view("user.detalles", ["user"=>$user]);
     }
 
     public function getImage($filename){

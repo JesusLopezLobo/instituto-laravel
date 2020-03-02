@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $table = 'users'; // Tabla a modificar.
+
+    // Profesor --- 1:N --- Incidencias.
+    public function incidencias(){
+        return $this->hasMany('App\incidenciaEntidad');
+    }
+
+    // Profesor --- 1:N --- Logs.
+    public function logs(){
+        return $this->hasMany('App\logsEntidad');
+    } 
 }
