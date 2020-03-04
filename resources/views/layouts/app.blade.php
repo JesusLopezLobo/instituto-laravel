@@ -20,6 +20,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
+    <!-- Recaptcha -->
+
 </head>
 <body>
     <div id="app">
@@ -51,12 +53,16 @@
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item">
                             <a href="{{ route('incidencias.create') }}" class="nav-link">Incidencias</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Logs</a>
-                            </li>
+                            @if(Auth::user()->rol == "admin")
+                                <li class="nav-item">
+                                <a href="{{ route('logs.listado') }}" class="nav-link">Logs</a>
+                                </li>
+                            @endif
+
 
                         @include('includes.avatar') <!-- Imagen -->
 

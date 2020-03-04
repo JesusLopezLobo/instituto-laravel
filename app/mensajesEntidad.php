@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class logsEntidad extends Model
+class mensajesEntidad extends Model
 {
-    protected $table = 'logs';
+    protected $table = 'mensajes';
 
     // Incidencia --- N:1 --- Profesor
     public function user(){

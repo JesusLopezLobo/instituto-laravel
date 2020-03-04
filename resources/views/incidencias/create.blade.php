@@ -9,7 +9,7 @@
             @if(session("message"))
             <div class="alert alert-success">{{session("message")}}</div>
             @endif
-
+        <a class="btn btn-danger" href="{{ route('incidencias.print') }}">Imprimir pdf</a>
             <div class="card">
                 <div class="card-header"> 
                     Crear nueva incidencia.
@@ -99,7 +99,7 @@
                                                     <td scope="col">{{ $value->descripcion }}</td>
                                                     <td scope="col">{{ $value->importancia }}</td>
                                                     <td scope="col">{{ $value->user->name }}</td>
-                                                <td><a href="{{ route('incidencias.delete', ['id' => $value->id]) }}" class="btn btn-danger">ELIMINAR</a>  <a href="{{ route('incidencias.edit', ['id' => $value->id]) }}" class="btn btn-success">EDITAR</a>  <a href="#" class="btn btn-primary">DETALLES</a></td>
+                                                <td><a href="{{ route('incidencias.delete', ['id' => $value->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estas seguro que deseas eliminar la incidencia?')">ELIMINAR</a>  <a href="{{ route('incidencias.edit', ['id' => $value->id]) }}" class="btn btn-success">EDITAR</a>  <a href="{{ route('incidencias.detalles', ['id' => $value->id]) }}" class="btn btn-primary">DETALLES</a></td>
 
                                                 </tr>
                                             {{-- @endif --}}

@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        (new logsController)->save("Se ha logueado.");
         return view('home');
     }
 }

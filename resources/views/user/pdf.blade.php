@@ -1,12 +1,15 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-@section('content')
+    <title>Document</title>
+</head>
+<body>
 
-
-    @if(session("message"))
-        <div class="alert alert-success">{{session("message")}}</div>
-    @endif
-    <a  class="btn btn-danger" href="{{ route('user.print') }}">Imprimir en pdf</a>
     <table class="table table-hover">
         <tr class="bg-dark">   
             <th class="text-white">id</th> 
@@ -24,14 +27,6 @@
                 <td scope="col">{{ $value->name }}</td>
                 <td scope="col">{{ $value->email }}</td>
                 <td scope="col">{{ $value->aula }}</td>
-                <td> 
-                    @if(Auth::user()->rol == "admin")
-                        <a href="{{ route('user.delete', ['id' => $value->id]) }}" onclick="return confirm('¿Estas seguro que deseas eliminar la incidencia?')" class="btn btn-danger">ELIMINAR</a>
-                        <a href="{{ route('user.detalles', ['id' => $value->id]) }}" class="btn btn-primary">DETALLES</a>
-                    @endif
-                    <a href="{{ route('mensajes', ['id' => $value->id]) }}" class="btn btn-success">MENSAJES</a>
-                </td>
-
             </tr>
         {{-- @endif --}}
 
@@ -40,6 +35,6 @@
         
     @endforeach
     </table>
-    {{ $user->links() }}
 
-@endSection
+</body>
+</html>

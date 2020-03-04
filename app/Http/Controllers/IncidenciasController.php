@@ -38,7 +38,11 @@ class IncidenciasController extends Controller
         ]);
     }
 
-    
+    public function imprimirPDF(){
+        $incidencias = incidenciaEntidad::all();
+        $pdf = \PDF::loadView('incidencias.pdf', ['incidencias' => $incidencias]);
+        return $pdf->download('incidencias.pdf');
+    }
     
     public function save(Request $request){
 
@@ -66,7 +70,11 @@ class IncidenciasController extends Controller
         die(); */
         //var_dump($user->id);
 
-        $incidencia->save();
+        $resultado = $incidencia->save();
+        
+        if($resultado){
+            (new logsController)->save("Se ha creado una incidencia.");
+        }
 
        return redirect()->route('incidencias.create')
                             ->with(['message'=>'El usuario actualizado correctamente']);
@@ -103,7 +111,11 @@ class IncidenciasController extends Controller
         var_dump($id_incidencia);
         die(); */
 
-        $incidencia->update();
+        $resultado = $incidencia->update();
+
+        if($resultado){
+            (new logsController)->save("Se ha modificado una incidencia.");
+        }
 
         return redirect()-> route('incidencias.edit', ['id' => $id_incidencia])
                                 ->with(['message'=>'La incidencia se ha actualizado correctamente']);
@@ -119,12 +131,25 @@ class IncidenciasController extends Controller
 
         //Comprobar si soy el dueño del comentario de la ap
         if($user->rol == "admin"){
-            $incidencia->delete();
+            $resultado = $incidencia->delete();
+
+            if($resultado){
+                (new logsController)->save("Se ha logueado");
+            }
+
             return redirect()->route('incidencias.create')
                             ->with(['message'=>'Has borrado la incidencia correctamente.']); 
         }else {
             return redirect()->route('incidencias.create')
                             ->with(['message'=>'No se ha borrado.']); 
         }
+    }
+
+    public function detalles($id){
+        $incidencia = incidenciaEntidad::find($id);
+
+        return view('incidencias.detalles', [
+            'incidencia' => $incidencia,
+        ]);
     }
 }

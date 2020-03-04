@@ -40,6 +40,12 @@ class UserController extends Controller
                             ->with(['message'=>'No se ha borrado.']); 
         } */
     }
+    
+    public function imprimirPDF(){
+        $user = User::all();
+        $pdf = \PDF::loadView('user.pdf', ['user' => $user]);
+        return $pdf->download('ListadoUsuarios.pdf');
+    }
 
     public function update(Request $request){ 
         $user = \Auth::user();
